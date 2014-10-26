@@ -113,4 +113,4 @@ MeanStdData<-melt(FinalData,id.vars=c("SubjectId","ActivityType","ActivityId"));
 TidyData<-dcast(SubjectId + ActivityType ~ variable, data = MeanStdData, fun=mean)
 
 # Write the tidyData data frame as a table 
-write.table(TidyData, "./TidyData.txt",row.names=TRUE,sep='\t');
+write.table(TidyData, "./TidyData.txt",row.name=FALSE,sep='\t');
