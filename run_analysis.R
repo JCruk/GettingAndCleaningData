@@ -65,16 +65,16 @@ FullData = rbind(TrainingData,TestData);
 
 # 2. Extract only the measurements on the mean and standard deviation for each measurement. 
 
-# Create a vector for the column names from the finalData, which will be used
+# Create a vector for the column names from the FullData data frame, which will be used
 # to select the desired mean() & stddev() columns
 colNames  = colnames(FullData); 
 
-#SelectData <- SelectData[,grepl("mean|std|SubjectId|ActivityId", names(SelectData))] # Uncomment this line to include meanFreq variables
-SelectData <- FullData[,grepl("mean|std|SubjectId|ActivityId", names(FullData)) & !grepl("meanFreq", names(FullData))] #Comment out this line to include meanFreq variable
+# Create a data frame of only SubjectId, ActivityId and variables containing the strings "mean" or "std", but not containing the string "meanFreq"
+SelectData <- FullData[,grepl("mean|std|SubjectId|ActivityId", names(FullData)) & !grepl("meanFreq", names(FullData))] 
 
 # 3. Use descriptive activity names to name the activities in the data set
 
-# Merge the finalData set with the acitivityType table to include descriptive activity names
+# Merge the SelectData data frame with the acitivityType table to include descriptive activity names
 FinalData = merge(SelectData,ActivityType,by='ActivityId',all.x=TRUE);
 
 # Update the colNames vector to include the new column names after merge
